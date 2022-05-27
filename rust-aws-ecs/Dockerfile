@@ -5,6 +5,7 @@ COPY src/ src/
 RUN cargo install --path .
 
 FROM gcr.io/distroless/cc
-COPY --from=builder /usr/local/cargo/bin/rust-aws-ecs /usr/local/bin/rust-aws-ecs
+COPY --from=builder /usr/local/cargo/bin/rust-aws-ecs /
+COPY application.yaml /
 EXPOSE 8080
-CMD ["rust-aws-ecs"]
+CMD ["./rust-aws-ecs"]

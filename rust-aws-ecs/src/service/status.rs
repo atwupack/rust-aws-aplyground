@@ -1,8 +1,8 @@
+use crate::AppState;
 use actix_web::web::{Data, Json};
 use actix_web::{get, Responder, Result};
 use chrono::Utc;
 use serde::Serialize;
-use crate::AppState;
 
 #[derive(Serialize)]
 struct Status {
@@ -14,9 +14,8 @@ struct Status {
 
 #[get("/status")]
 pub(crate) async fn get_status(data: Data<AppState>) -> Result<impl Responder> {
-
     let now = Utc::now();
-    let uptime_in_sec = now.timestamp()-data.start_time.timestamp();
+    let uptime_in_sec = now.timestamp() - data.start_time.timestamp();
 
     let status = Status {
         name: data.name.clone(),
